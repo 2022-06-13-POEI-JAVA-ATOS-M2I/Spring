@@ -9,23 +9,23 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>fr.m2i</groupId>
-    <artifactId>spring-lesson</artifactId>
+    <artifactId>spring-lesson-mvc</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-lesson</name>
+    <name>spring-lesson-mvc</name>
     <description>Projet demo pour la formation Java</description>
     
     <properties>
-        <exec.mainClass>fr.m2i.spring.lesson.SpringLessonApplication</exec.mainClass>
+        <exec.mainClass>fr.m2i.spring.lesson.mvc.SpringLessonApplication</exec.mainClass>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
         <dependency>
@@ -33,6 +33,7 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -51,8 +52,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
-                    <source>18</source>
-                    <target>18</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
