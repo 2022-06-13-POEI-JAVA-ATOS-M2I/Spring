@@ -1,4 +1,4 @@
-package fr.m2i.spring.lesson.mvc;
+package fr.m2i.spring.lesson.todo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
