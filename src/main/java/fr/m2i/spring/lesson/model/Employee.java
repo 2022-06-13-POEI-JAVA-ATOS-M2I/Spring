@@ -2,7 +2,6 @@ package fr.m2i.spring.lesson.model;
 
 import javax.persistence.*;
 
-
 @Entity
 @Table(name = "employee")
 public class Employee {
