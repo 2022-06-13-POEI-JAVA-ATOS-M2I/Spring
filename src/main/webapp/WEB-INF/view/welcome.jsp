@@ -1,11 +1,11 @@
 <%@ include file="common/header.jsp"%>
 <%@ include file="common/navigation.jsp"%>
-<div class="container">
+<div>
 
-	<div class="panel panel-primary">
-		<div class="panel-heading">Home Page</div>
-		<div class="panel-body">
-			Welcome ${name}!! <a href="/list-todos">Click here</a> to manage your
+	<div>
+		<div>Home Page</div>
+		<div>
+			Welcome ${name} ! <a href="/list-todos">Click here</a> to manage your
 			todo's.
 		</div>
 	</div>

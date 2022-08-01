@@ -1,17 +1,17 @@
-<nav role="navigation" class="navbar navbar-default">
+<nav role="navigation">
     <div class="">
-        <a href="#" class="navbar-brand">Todo App</a>
+        <a href="#">Todo App</a>
     </div>
-    <div class="navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li class="active">
+    <div>
+        <ul>
+            <li>
                 <a href="/">Home</a>
             </li>
             <li>
                 <a href="/list-todos">Todos</a>
             </li>
         </ul>
-        <ul class="nav navbar-nav">
+        <ul>
             <li>
                 <a href="/logout">Logout</a>
             </li>

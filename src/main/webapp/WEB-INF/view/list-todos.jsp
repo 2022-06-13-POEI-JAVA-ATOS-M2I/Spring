@@ -1,17 +1,17 @@
 <%@ include file="common/header.jsp"%>
 <%@ include file="common/navigation.jsp"%>
 
-<div class="container">
+<div>
     <div>
-        <a type="button" class="btn btn-primary btn-md" href="/add-todo">Add Todo</a>
+        <a type="button" href="/add-todo">Add Todo</a>
     </div>
     <br>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
+    <div>
+        <div>
             <h3>List of TODO's</h3>
         </div>
-        <div class="panel-body">
-            <table class="table table-striped">
+        <div>
+            <table>
                 <thead>
                     <tr>
                         <th width="40%">Description</th>
