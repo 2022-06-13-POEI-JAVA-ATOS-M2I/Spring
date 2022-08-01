@@ -13,7 +13,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     private UserService userService;
-   
+    private BCryptPasswordEncoder passwordEncoder;
+     
+    public SecurityConfiguration(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+    }
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -37,16 +43,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
     }
 
+    /*
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    */
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
         auth.setUserDetailsService(userService);
-        auth.setPasswordEncoder(passwordEncoder());
+        auth.setPasswordEncoder(passwordEncoder);
         return auth;
     }
 

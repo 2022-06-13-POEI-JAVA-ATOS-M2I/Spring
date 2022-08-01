@@ -27,7 +27,8 @@
                </td>
             </tr>
          </table>  
-      </form:form>
+      </form>
+      <a href="/registration">Register</a>
    </body>
    
 </html>

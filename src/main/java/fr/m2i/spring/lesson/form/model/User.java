@@ -3,6 +3,8 @@ package fr.m2i.spring.lesson.form.model;
 
 import javax.persistence.*;
 import java.util.List;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -17,10 +19,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @NotEmpty
     private String firstName;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
+    @Email
     private String email;
+    @NotEmpty
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
