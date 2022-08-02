@@ -5,8 +5,8 @@ import fr.m2i.spring.lesson.mvc.exception.NotEnoughStockException;
 import fr.m2i.spring.lesson.mvc.form.BuyForm;
 import fr.m2i.spring.lesson.mvc.form.UserForm;
 import fr.m2i.spring.lesson.mvc.model.Product;
-import fr.m2i.spring.lesson.mvc.service.ProductService;
-import fr.m2i.spring.lesson.mvc.service.UserService;
+import fr.m2i.spring.lesson.mvc.service.IProductService;
+import fr.m2i.spring.lesson.mvc.service.IUserService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DistributeurController {
 
-    private final UserService userService;
-    private final ProductService productService;
+    private final IUserService userService;
+    private final IProductService productService;
 
     @Autowired
-    public DistributeurController(UserService userService, ProductService productService) {
+    public DistributeurController(IUserService userService, IProductService productService) {
         this.userService = userService;
         this.productService = productService;
     }

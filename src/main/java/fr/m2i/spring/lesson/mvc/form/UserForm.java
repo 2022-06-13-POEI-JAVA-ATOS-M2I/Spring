@@ -6,8 +6,8 @@ import javax.validation.constraints.NotNull;
 
 @Valid
 public class UserForm {
-    
-    @Min(value = 1, message="Vous devez entrer une valeur positive")
+
+    @Min(value = 1, message = "Vous devez entrer une valeur positive")
     @NotNull(message = "Vous devez entrer une valeur")
     private Double balance;
 

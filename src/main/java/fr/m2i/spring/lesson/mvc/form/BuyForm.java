@@ -6,9 +6,9 @@ import javax.validation.constraints.NotNull;
 
 @Valid
 public class BuyForm {
-    
-    @Min(1)
-    @NotNull
+
+    @Min(value = 1, message = "Vous devez entrer une valeur positive")
+    @NotNull(message = "Vous devez entrer une valeur")
     private Long id;
 
     public BuyForm() {

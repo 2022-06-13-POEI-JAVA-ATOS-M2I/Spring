@@ -13,10 +13,10 @@ import org.springframework.stereotype.Service;
 public class ProductService implements IProductService {
 
     private final ProductRepository productRepository;
-    private final UserService userService;
+    private final IUserService userService;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, UserService userService) {
+    public ProductService(ProductRepository productRepository, IUserService userService) {
         this.productRepository = productRepository;
         this.userService = userService;
 
