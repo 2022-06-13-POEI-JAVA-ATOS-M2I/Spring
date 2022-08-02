@@ -1,5 +1,7 @@
 package fr.m2i.spring.lesson.mvc.controller;
 
+import fr.m2i.spring.lesson.mvc.exception.BalanceInsufficientException;
+import fr.m2i.spring.lesson.mvc.exception.NotEnoughStockException;
 import fr.m2i.spring.lesson.mvc.form.BuyForm;
 import fr.m2i.spring.lesson.mvc.form.UserForm;
 import fr.m2i.spring.lesson.mvc.model.Product;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +37,7 @@ public class DistributeurController {
     }
 
     @RequestMapping(value = "/addBalance", method = RequestMethod.POST)
-    public String addBalance(@ModelAttribute("userForm") @Valid UserForm userForm, BindingResult result, ModelMap model) {
+    public String addBalance(@Valid UserForm userForm, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
             return "distributeur";
@@ -53,12 +56,18 @@ public class DistributeurController {
         }
 
         Product product = productService.findById(buyForm.getId());
-        
+
         if (product == null) {
+            result.rejectValue("id", null, "Le produit n'existe pas");
             return "distributeur";
         }
 
-        productService.buyProduct(product);
+        try {
+            productService.buyProduct(product);
+        } catch (NotEnoughStockException | BalanceInsufficientException e) {
+            result.rejectValue("id", null, e.getMessage());
+            return "distributeur";
+        }
 
         return "redirect:distributeur";
     }

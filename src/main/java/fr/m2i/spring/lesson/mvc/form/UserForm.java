@@ -7,8 +7,8 @@ import javax.validation.constraints.NotEmpty;
 @Valid
 public class UserForm {
     
-    @Min(0)
-    @NotEmpty
+    @Min(value = 0, message="ta grand mere")
+    @NotEmpty(message = "putain")
     private Double balance;
 
     public UserForm() {

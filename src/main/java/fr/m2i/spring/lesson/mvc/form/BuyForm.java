@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 @Valid
 public class BuyForm {
     
-    @Min(0)
+    @Min(1)
     @NotEmpty
     private Long id;
 

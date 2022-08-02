@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 
     private Double balance;
 
@@ -13,18 +13,22 @@ public class UserService {
         this.balance = 10d;
     }
 
+    @Override
     public Double getBalance() {
         return balance;
     }
 
+    @Override
     public void setBalance(Double balance) {
         this.balance = balance;
     }
     
+    @Override
     public void addBalance(Double balance) {
         this.balance += balance;
     }
     
+    @Override
     public void decreaseBalance(Double balance) {
         this.balance -= balance;
     }
