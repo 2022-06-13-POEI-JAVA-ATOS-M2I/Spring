@@ -1,8 +1,15 @@
 package fr.m2i.spring.lesson.mvc.service;
 
-public interface IUserService {
-    Double getBalance();
-    void setBalance(Double balance);
-    void addBalance(Double balance);
-    void decreaseBalance(Double balance);
+import fr.m2i.spring.lesson.mvc.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+public interface IUserService extends UserDetailsService {
+
+    void addBalance(User user, Double balance);
+
+    void decreaseBalance(User user, Double balance);
+
+    User findByEmail(String email);
+
+    User save(User user);
 }

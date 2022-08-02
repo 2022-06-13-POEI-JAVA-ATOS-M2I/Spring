@@ -1,35 +1,72 @@
 package fr.m2i.spring.lesson.mvc.service;
 
+import fr.m2i.spring.lesson.mvc.model.Role;
+import fr.m2i.spring.lesson.mvc.model.User;
+import fr.m2i.spring.lesson.mvc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements IUserService {
 
-    private Double balance;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService() {
-        this.balance = 10d;
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
-    public Double getBalance() {
-        return balance;
+    public void addBalance(User user, Double balance) {
+        
+        if (user == null) {
+            return;
+        }
+
+        user.setBalance(user.getBalance() + balance);
+        userRepository.save(user);
     }
 
     @Override
-    public void setBalance(Double balance) {
-        this.balance = balance;
+    public void decreaseBalance(User user, Double balance) {
+        
+        if (user == null) {
+            return;
+        }
+
+        user.setBalance(user.getBalance() - balance);
+        userRepository.save(user);
     }
-    
+
     @Override
-    public void addBalance(Double balance) {
-        this.balance += balance;
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
-    
+
     @Override
-    public void decreaseBalance(Double balance) {
-        this.balance -= balance;
+    public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if (user.getRole() == null) {
+            user.setRole(new Role("CUSTOMER"));
+        }
+
+        return userRepository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = findByEmail(email);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+
+        return user;
     }
 }

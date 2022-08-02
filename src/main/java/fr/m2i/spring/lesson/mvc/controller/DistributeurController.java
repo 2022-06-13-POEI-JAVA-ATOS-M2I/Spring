@@ -5,18 +5,19 @@ import fr.m2i.spring.lesson.mvc.exception.NotEnoughStockException;
 import fr.m2i.spring.lesson.mvc.form.BuyForm;
 import fr.m2i.spring.lesson.mvc.form.UserForm;
 import fr.m2i.spring.lesson.mvc.model.Product;
+import fr.m2i.spring.lesson.mvc.model.User;
 import fr.m2i.spring.lesson.mvc.service.IProductService;
 import fr.m2i.spring.lesson.mvc.service.IUserService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class DistributeurController {
@@ -30,25 +31,25 @@ public class DistributeurController {
         this.productService = productService;
     }
 
-    @GetMapping("/distributeur")
+    @GetMapping({"/", "/distributeur"})
     public String showDistributorPage(ModelMap model) {
         return "distributeur";
     }
 
-    @RequestMapping(value = "/addBalance", method = RequestMethod.POST)
-    public String addBalance(@Valid UserForm userForm, BindingResult result, ModelMap model) {
+    @PostMapping(value = "/addBalance")
+    public String addBalance(@Valid UserForm userForm, BindingResult result, ModelMap model, @AuthenticationPrincipal User user) {
 
         if (result.hasErrors()) {
             return "distributeur";
         }
 
-        userService.addBalance(userForm.getBalance());
+        userService.addBalance(user, userForm.getBalance());
 
         return "redirect:distributeur";
     }
 
-    @RequestMapping(value = "/buyProduct", method = RequestMethod.POST)
-    public String buyProduct(@ModelAttribute("buyForm") @Valid BuyForm buyForm, BindingResult result, ModelMap model) {
+    @PostMapping(value = "/buyProduct")
+    public String buyProduct(@ModelAttribute("buyForm") @Valid BuyForm buyForm, BindingResult result, ModelMap model, @AuthenticationPrincipal User user) {
 
         if (result.hasErrors()) {
             return "distributeur";
@@ -62,7 +63,7 @@ public class DistributeurController {
         }
 
         try {
-            productService.buyProduct(product);
+            productService.buyProduct(user, product);
         } catch (NotEnoughStockException | BalanceInsufficientException e) {
             result.rejectValue("id", null, e.getMessage());
             return "distributeur";
@@ -79,11 +80,6 @@ public class DistributeurController {
     @ModelAttribute("buyForm")
     public BuyForm addBuyForm() {
         return new BuyForm();
-    }
-
-    @ModelAttribute("credit")
-    public Double addCredit() {
-        return userService.getBalance();
     }
 
     @ModelAttribute("stock")

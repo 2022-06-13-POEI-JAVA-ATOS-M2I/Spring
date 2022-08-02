@@ -3,6 +3,7 @@ package fr.m2i.spring.lesson.mvc.service;
 import fr.m2i.spring.lesson.mvc.exception.BalanceInsufficientException;
 import fr.m2i.spring.lesson.mvc.exception.NotEnoughStockException;
 import fr.m2i.spring.lesson.mvc.model.Product;
+import fr.m2i.spring.lesson.mvc.model.User;
 import fr.m2i.spring.lesson.mvc.repository.ProductRepository;
 import java.util.List;
 import java.util.Optional;
@@ -42,18 +43,22 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public void buyProduct(Product product) throws NotEnoughStockException, BalanceInsufficientException {
+    public void buyProduct(User user, Product product) throws NotEnoughStockException, BalanceInsufficientException {
+
+        if (user == null) {
+            return;
+        }
 
         if (product.getQuantity() <= 0) {
             throw new NotEnoughStockException();
         }
 
-        if (userService.getBalance() < product.getPrice()) {
+        if (user.getBalance() < product.getPrice()) {
             throw new BalanceInsufficientException();
         }
 
         product.setQuantity(product.getQuantity() - 1);
-        userService.decreaseBalance(product.getPrice());
+        userService.decreaseBalance(user, product.getPrice());
         save(product);
     }
 
