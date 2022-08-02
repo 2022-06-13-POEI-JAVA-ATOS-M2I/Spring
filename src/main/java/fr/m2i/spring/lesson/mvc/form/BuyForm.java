@@ -2,13 +2,13 @@ package fr.m2i.spring.lesson.mvc.form;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Valid
 public class BuyForm {
     
     @Min(1)
-    @NotEmpty
+    @NotNull
     private Long id;
 
     public BuyForm() {
