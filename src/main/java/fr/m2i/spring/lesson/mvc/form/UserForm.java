@@ -1,25 +1,36 @@
 package fr.m2i.spring.lesson.mvc.form;
 
+import fr.m2i.spring.lesson.mvc.model.Role;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+@NoArgsConstructor
+@Data
+@ToString
 @Valid
 public class UserForm {
 
-    @Min(value = 1, message = "Vous devez entrer une valeur positive")
+    private Long id;
+
+    @NotEmpty(message = "Vous devez entrer une valeur")
+    private String firstName;
+
+    @NotEmpty(message = "Vous devez entrer une valeur")
+    private String lastName;
+
+    @NotEmpty(message = "Vous devez entrer une valeur")
+    private String email;
+
+    @NotEmpty(message = "Vous devez entrer une valeur")
+    private String password;
+
     @NotNull(message = "Vous devez entrer une valeur")
     private Double balance;
 
-    public UserForm() {
-        
-    }
-    
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
+    @NotNull(message = "Vous devez entrer une valeur")
+    private Role role;
 }

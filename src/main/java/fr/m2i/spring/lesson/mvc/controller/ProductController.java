@@ -14,37 +14,33 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/provider")
 public class ProductController {
 
-    private final IUserService userService;
     private final IProductService productService;
 
     @Autowired
-    public ProductController(IUserService userService, IProductService productService) {
-        this.userService = userService;
+    public ProductController(IProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping({"/", "/products"})
     public String showProductsPage(ModelMap model) {
-        model.addAttribute("productFrom", new ProductForm());
         return "provider/products";
     }
 
     @GetMapping("/addProduct")
     public String showAddProductPage(ModelMap model) {
-        model.addAttribute("productFrom", new ProductForm());
-        return "provider/save-products";
+        return "provider/save-product";
     }
 
-    @GetMapping(value = "/updateProduct/{id}")
-    public String showUpdateProduct(@PathVariable("id") Long id, ModelMap model) {
+    @GetMapping(value = "/updateProduct")
+    public String showUpdateProduct(@RequestParam("id") Long id, ModelMap model) {
 
         if (id == null || id < 1) {
             model.addAttribute("error", "Veuillez entrer un id produit valide");
@@ -64,13 +60,13 @@ public class ProductController {
         productForm.setQuantity(product.getQuantity());
         productForm.setPrice(product.getPrice());
 
-        model.put("productFrom", productForm);
+        model.put("productForm", productForm);
 
-        return "provider/save-products";
+        return "provider/save-product";
     }
 
-    @GetMapping(value = "/deleteProduct/{id}")
-    public String deleteProduct(@PathVariable("id") Long id, ModelMap model,
+    @GetMapping(value = "/deleteProduct")
+    public String deleteProduct(@RequestParam("id") Long id, ModelMap model,
             @AuthenticationPrincipal User user) {
 
         if (id == null || id < 1) {
@@ -100,9 +96,11 @@ public class ProductController {
             BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
-            return "provider/save-products";
+            return "provider/save-product";
         }
-        
+
+        saveProductFromForm(productForm);
+
         return "redirect:/provider/products";
     }
 
@@ -111,9 +109,11 @@ public class ProductController {
             BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
-            return "provider/save-products";
+            return "provider/save-product";
         }
-        
+
+        saveProductFromForm(productForm);
+
         return "redirect:/provider/products";
     }
 
@@ -122,4 +122,18 @@ public class ProductController {
         return productService.findAll();
     }
 
+    @ModelAttribute("productForm")
+    public ProductForm addProductForm() {
+        return new ProductForm();
+    }
+
+    private void saveProductFromForm(ProductForm productForm) {
+        Product product = new Product();
+        product.setId(productForm.getId());
+        product.setName(productForm.getName());
+        product.setQuantity(productForm.getQuantity());
+        product.setPrice(productForm.getPrice());
+
+        productService.save(product);
+    }
 }

@@ -14,18 +14,16 @@ import lombok.ToString;
 @Valid
 public class ProductForm {
 
-    @Min(value = 1, message = "Vous devez entrer une valeur positive")
-    @NotNull(message = "Vous devez entrer une valeur")
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "Vous devez entrer une valeur")
     private String name;
 
     @Min(1)
-    @NotNull
+    @NotNull(message = "Vous devez entrer une valeur")
     private Double price;
 
     @Min(1)
-    @NotNull
+    @NotNull(message = "Vous devez entrer une valeur")
     private int quantity;
 }

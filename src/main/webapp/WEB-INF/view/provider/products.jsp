@@ -26,9 +26,9 @@
                     <td>${p.quantity}</td>
                     <td>${p.price}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/provider/updateProduct/${p.id}">Modifier</a>
+                        <a href="${pageContext.request.contextPath}/provider/updateProduct?id=${p.id}">Modifier</a>
                         &nbsp;
-                        <a href="${pageContext.request.contextPath}/provider/deleteProduct/${p.id}" onclick="return confirm('Vous êtes sûr ?')">Supprimer</a>
+                        <a href="${pageContext.request.contextPath}/provider/deleteProduct?id=${p.id}" onclick="return confirm('Vous êtes sûr ?')">Supprimer</a>
                     </td>
                 </tr>
             </c:forEach>

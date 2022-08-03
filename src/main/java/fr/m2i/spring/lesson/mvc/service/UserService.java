@@ -3,6 +3,7 @@ package fr.m2i.spring.lesson.mvc.service;
 import fr.m2i.spring.lesson.mvc.model.Role;
 import fr.m2i.spring.lesson.mvc.model.User;
 import fr.m2i.spring.lesson.mvc.repository.UserRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -44,6 +45,16 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+    
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+    
+    @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
@@ -57,6 +68,11 @@ public class UserService implements IUserService {
         }
 
         return userRepository.save(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        userRepository.delete(user);
     }
 
     @Override

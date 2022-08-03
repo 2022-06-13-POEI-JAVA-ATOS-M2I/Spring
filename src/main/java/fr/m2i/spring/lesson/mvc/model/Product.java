@@ -22,10 +22,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     @NotEmpty
     private String name;
-    
+
     @Min(1)
     @NotNull
     private Double price;

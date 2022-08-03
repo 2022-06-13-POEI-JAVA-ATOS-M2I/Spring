@@ -41,7 +41,7 @@
         </security:authorize>
 
         <security:authorize access="isAuthenticated()">
-            <form:form method="POST" action="/addBalance" modelAttribute="userForm">
+            <form:form method="POST" action="/addBalance" modelAttribute="balanceForm">
                 <fieldset>
                     <legend>Ajouter du crédit</legend>
                     <p>
