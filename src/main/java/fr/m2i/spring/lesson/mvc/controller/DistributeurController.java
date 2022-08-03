@@ -3,6 +3,7 @@ package fr.m2i.spring.lesson.mvc.controller;
 import fr.m2i.spring.lesson.mvc.exception.BalanceInsufficientException;
 import fr.m2i.spring.lesson.mvc.exception.NotEnoughStockException;
 import fr.m2i.spring.lesson.mvc.form.BuyForm;
+import fr.m2i.spring.lesson.mvc.form.ProductForm;
 import fr.m2i.spring.lesson.mvc.form.UserForm;
 import fr.m2i.spring.lesson.mvc.model.Product;
 import fr.m2i.spring.lesson.mvc.model.User;
@@ -37,7 +38,8 @@ public class DistributeurController {
     }
 
     @PostMapping(value = "/addBalance")
-    public String addBalance(@Valid UserForm userForm, BindingResult result, ModelMap model, @AuthenticationPrincipal User user) {
+    public String addBalance(@Valid UserForm userForm, BindingResult result,
+            ModelMap model, @AuthenticationPrincipal User user) {
 
         if (result.hasErrors()) {
             return "distributeur";
@@ -49,7 +51,8 @@ public class DistributeurController {
     }
 
     @PostMapping(value = "/buyProduct")
-    public String buyProduct(@ModelAttribute("buyForm") @Valid BuyForm buyForm, BindingResult result, ModelMap model, @AuthenticationPrincipal User user) {
+    public String buyProduct(@ModelAttribute("buyForm") @Valid BuyForm buyForm,
+            BindingResult result, ModelMap model, @AuthenticationPrincipal User user) {
 
         if (result.hasErrors()) {
             return "distributeur";

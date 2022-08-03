@@ -14,5 +14,7 @@ public interface IProductService {
 
     Product save(Product product);
 
+    void delete(Product product);
+
     void buyProduct(User user, Product product) throws NotEnoughStockException, BalanceInsufficientException;
 }

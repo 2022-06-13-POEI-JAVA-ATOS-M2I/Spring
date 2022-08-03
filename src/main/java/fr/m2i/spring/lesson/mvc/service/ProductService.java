@@ -20,10 +20,6 @@ public class ProductService implements IProductService {
     public ProductService(ProductRepository productRepository, IUserService userService) {
         this.productRepository = productRepository;
         this.userService = userService;
-
-        save(new Product("café", 1d, 5));
-        save(new Product("soda", 2d, 5));
-        save(new Product("barre céréales", 3d, 5));
     }
 
     @Override
@@ -40,6 +36,11 @@ public class ProductService implements IProductService {
     @Override
     public Product save(Product product) {
         return productRepository.save(product);
+    }
+
+    @Override
+    public void delete(Product product) {
+        productRepository.delete(product);
     }
 
     @Override
@@ -61,5 +62,4 @@ public class ProductService implements IProductService {
         userService.decreaseBalance(user, product.getPrice());
         save(product);
     }
-
 }
