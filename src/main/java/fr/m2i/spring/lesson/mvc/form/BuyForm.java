@@ -1,10 +1,8 @@
 package fr.m2i.spring.lesson.mvc.form;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-@Valid
 public class BuyForm {
 
     @Min(value = 1, message = "Vous devez entrer une valeur positive")

@@ -1,6 +1,5 @@
 package fr.m2i.spring.lesson.mvc.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,7 +7,6 @@ public class UserService implements IUserService {
 
     private Double balance;
 
-    @Autowired
     public UserService() {
         this.balance = 10d;
     }

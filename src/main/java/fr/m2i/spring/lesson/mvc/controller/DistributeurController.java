@@ -11,6 +11,7 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +32,15 @@ public class DistributeurController {
     }
 
     @GetMapping("/distributeur")
+    //@RequestMapping(value = "/distributeur", method = RequestMethod.GET)
     public String showDistributorPage(ModelMap model) {
+        //model.addAttribute("userForm", new UserForm());
+
         return "distributeur";
     }
 
     @RequestMapping(value = "/addBalance", method = RequestMethod.POST)
-    public String addBalance(@Valid UserForm userForm, BindingResult result, ModelMap model) {
+    public String addBalance(@ModelAttribute("userForm") @Valid UserForm userForm, BindingResult result, ModelMap model) {
 
         if (result.hasErrors()) {
             return "distributeur";
@@ -60,7 +64,22 @@ public class DistributeurController {
             result.rejectValue("id", null, "Le produit n'existe pas");
             return "distributeur";
         }
-
+//
+//        
+//        if (product.getQuantity() <= 0) {
+//            result.rejectValue("id", null, "Stock insuffisant");
+//        }
+//
+//        if (userService.getBalance() < product.getPrice()) {
+//            result.rejectValue("id", null, "Pas assez de crédit");
+//        }
+//
+//        product.setQuantity(product.getQuantity() - 1);
+//        userService.decreaseBalance(product.getPrice());
+//        productService.save(product);
+        
+        
+        
         try {
             productService.buyProduct(product);
         } catch (NotEnoughStockException | BalanceInsufficientException e) {
@@ -68,14 +87,17 @@ public class DistributeurController {
             return "distributeur";
         }
 
+
         return "redirect:distributeur";
     }
 
+    // Equivalent de model.addAttribute("userForm", new UserForm());
     @ModelAttribute("userForm")
     public UserForm addUserForm() {
         return new UserForm();
     }
 
+    // Equivalent de model.addAttribute("buyForm", new BuyForm());
     @ModelAttribute("buyForm")
     public BuyForm addBuyForm() {
         return new BuyForm();
@@ -86,6 +108,7 @@ public class DistributeurController {
         return userService.getBalance();
     }
 
+    // Equivalent de model.addAttribute("stock", productService.findAll());
     @ModelAttribute("stock")
     public List<Product> addStock() {
         return productService.findAll();

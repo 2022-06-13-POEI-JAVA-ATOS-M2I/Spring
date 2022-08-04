@@ -4,7 +4,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-@Valid
 public class UserForm {
 
     @Min(value = 1, message = "Vous devez entrer une valeur positive")
