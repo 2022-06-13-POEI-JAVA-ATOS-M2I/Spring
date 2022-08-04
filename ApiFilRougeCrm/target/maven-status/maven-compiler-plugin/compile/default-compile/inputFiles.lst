@@ -1,0 +1,17 @@
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/dto/OrderDTO.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/entity/Customer.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/dto/CustomerMapper.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/service/CustomerService.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/dto/CustomerDTO.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/ApiFilRougeCrmApplication.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/service/OrderService.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/controller/CustomerController.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/response/ErrorResponse.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/controller/OrderController.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/repository/CustomerRepository.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/response/CrmResponseEntity.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/config/SwaggerConfig.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/dto/OrderMapper.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/repository/OrderRepository.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/entity/Order.java
+/Users/TiityTheBoSs/Workspace/Formation/POE Java/Spring/ApiFilRougeCrm/src/main/java/fr/m2i/apifilrougecrm/exception/NotFoundException.java
