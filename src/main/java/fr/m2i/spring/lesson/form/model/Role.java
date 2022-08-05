@@ -13,7 +13,6 @@ import lombok.ToString;
 
 @NoArgsConstructor
 @Data
-@ToString
 @Entity
 @Table(name = "roles")
 public class Role {

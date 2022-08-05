@@ -3,6 +3,7 @@ package fr.m2i.spring.lesson.form.service;
 import fr.m2i.spring.lesson.form.model.Role;
 import fr.m2i.spring.lesson.form.model.User;
 import fr.m2i.spring.lesson.form.repository.UserRepository;
+import java.util.ArrayList;
 import java.util.Arrays;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
     
     private UserRepository userRepository;
     private BCryptPasswordEncoder passwordEncoder;
@@ -25,6 +26,13 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        
+        User adminUser = new User("admin", "admin", "admin@mail.com", "admin");
+        
+        adminUser.setRoles(Arrays.asList(new Role("ROLE_ADMIN")));
+        adminUser.setPassword(passwordEncoder.encode(adminUser.getPassword()));
+        
+        userRepository.save(adminUser);
     }
     
     
@@ -45,15 +53,9 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(),
-                user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
+        }      
+        
+        return user;
     }
-    
-    private List<? extends GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName()))
-                .collect(Collectors.toList());
-    }
+   
 }

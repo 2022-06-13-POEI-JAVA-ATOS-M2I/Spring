@@ -25,10 +25,15 @@
             </p>
         </security:authorize>
 
+            
+            
+            
+            
+            
         <security:authorize access="hasRole('MANAGER')">
 
             <p>
-                <a href="${pageContext.request.contextPath}/teams">Teams Management</a>
+                <a href="/teams">Teams Management</a>
             </p>
 
         </security:authorize>	
@@ -37,7 +42,7 @@
         <security:authorize access="hasRole('ADMIN')">  
 
             <p>
-                <a href="${pageContext.request.contextPath}/systems">IT Systems</a>
+                <a href="/systems">IT Systems</a>
             </p>
 
         </security:authorize>
@@ -46,7 +51,7 @@
 
         <security:authorize access="isAuthenticated()">
 
-            <form:form action="${pageContext.request.contextPath}/logout" method="POST">
+            <form:form action="/logout" method="POST">
 
                 <input type="submit" value="Logout" />
 
