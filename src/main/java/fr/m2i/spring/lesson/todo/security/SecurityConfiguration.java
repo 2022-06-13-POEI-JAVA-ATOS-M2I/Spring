@@ -27,8 +27,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/*todo*/**")
                 .access("hasRole('USER')")
                 .and()
-                .formLogin();
-
+                .formLogin()
+                .and()
+                .logout()
+                .logoutUrl("/logout");
+        
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }

@@ -6,6 +6,7 @@ import fr.m2i.spring.lesson.todo.service.ITodoService;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -58,10 +59,10 @@ public class TodoController {
     }
 
     @RequestMapping(value = "/delete-todo", method = RequestMethod.GET)
-    public String deleteTodo(@RequestParam long id) {
-        todoService.deleteTodo(id);
-        // service.deleteTodo(id);
-        return "redirect:/list-todos";
+    public String deleteTodo(@RequestParam long id) throws Exception {
+        throw new Exception("Something's not good");
+        //todoService.deleteTodo(id);
+        //return "redirect:/list-todos";
     }
 
     @RequestMapping(value = "/update-todo", method = RequestMethod.GET)
